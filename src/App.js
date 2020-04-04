@@ -4,6 +4,9 @@ import './App.css';
 
 import Intro from './Intro';
 import GameSelect from './GameSelect';
+import Europe from './Europe';
+import World from './World';
+
 
 const App = () => {
   return (
@@ -11,7 +14,9 @@ const App = () => {
       <main>
         <Switch>
           <Route exact path='/' component={Intro} />
-          <Route exact path='/game-select' component={GameSelect} />
+          <Route path='/game-select' component={GameSelect} />
+          <Route path='/europe' component={Europe} />
+          <Route path='/world' component={World} />
         </Switch>
       </main>
     </BrowserRouter>

@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom';
 const GameSelect = () => {
   return (
     <div>
-      <Link>Europe</Link>
-      <Link>Asia+Oceania</Link>
-      <Link>Africa</Link>
-      <Link>Americas</Link>
-      <Link>All World</Link>
+      <Link to='/world'>All World</Link>
+      <Link to='/europe'>Europe</Link>
+      <Link to='/asia-oceania'>Asia+Oceania</Link>
+      <Link to='/africa'>Africa</Link>
+      <Link to='/americas'>Americas</Link>
     </div>
   );
 };
