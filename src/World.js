@@ -4,10 +4,13 @@ import axios from 'axios';
 const World = () => {
   const [data, setData] = useState([]);
   const [question, setQuestion] = useState({
-    question: '',
     flag: '',
+    correctAnswer: '',
     answers: []
   });
+
+  const [score, setScore] = useState(0);
+  const [guess, setGuess] = useState('');
 
   const getData = async () => {
     try {
@@ -65,6 +68,16 @@ const World = () => {
     return newArray;
   };
 
+  const handleAnswerClick = (e) => {
+    console.log(e.target.textContent);
+    if (e.target.textContent === question.correctAnswer) {
+      setScore(score + 1);
+      setGuess('Correct');
+    } else {
+      setGuess('Incorrect');
+    }
+  };
+
   return (
     <div>
       <h2>Guess the flag</h2>
@@ -73,9 +86,14 @@ const World = () => {
         style={{ width: '400px', height: '200px' }}
         alt='flag'
       />
-      {question.answers.map((answer, index) => (
-        <div key={index}>{answer}</div>
-      ))}
+      <div>
+        {question.answers.map((answer, index) => (
+          <button onClick={handleAnswerClick} key={index}>
+            {answer}
+          </button>
+        ))}
+      </div>
+      <div>{guess && <div>You are {guess}</div>}</div>
     </div>
   );
 };
