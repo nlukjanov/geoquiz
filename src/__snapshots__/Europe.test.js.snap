@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Europe /> should render a component 1`] = `
+<div
+  data-testid="europe"
+>
+  Hello from Europe
+</div>
+`;

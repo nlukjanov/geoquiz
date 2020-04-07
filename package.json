@@ -16,7 +16,7 @@
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --coverage",
+    "test": "react-scripts test --coverage --watchAll",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -39,5 +39,16 @@
     "eslint-plugin-react": "^7.19.0",
     "prettier": "2.0.2",
     "source-map-explorer": "^2.4.2"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "**/*.{js,jsx}",
+      "!**/node_modules/**",
+      "!**/vendor/**"
+    ],
+    "coveragePathIgnorePatterns": [
+      "src/index.js",
+      "src/serviceWorker.js"
+    ]
   }
 }
