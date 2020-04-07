@@ -11,7 +11,7 @@ import World from './World';
 const App = () => {
   return (
     <BrowserRouter>
-      <main>
+      <main data-testid='main'>
         <Switch>
           <Route exact path='/' component={Intro} />
           <Route path='/game-select' component={GameSelect} />

@@ -1,3 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Intro /> should render a component 1`] = `<div />`;
+exports[`<Intro /> should render a component 1`] = `
+<div
+  data-testid="intro"
+>
+  <h1
+    class="title"
+    data-testid="h1 title"
+  >
+    Geo Quiz!
+  </h1>
+  <a
+    data-testid="link to new game"
+    href="/game-select"
+  >
+    Start New Game
+  </a>
+</div>
+`;

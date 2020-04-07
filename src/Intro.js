@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 
 const Intro = () => {
   return (
-    <div>
-      <h1>Geo Quiz!</h1>
-      <Link to='/game-select'>Start New Game</Link>
+    <div data-testid='intro'>
+      <h1 className='title' data-testid='h1 title'>Geo Quiz!</h1>
+      <Link to='/game-select' data-testid='link to new game'>Start New Game</Link>
     </div>
   );
 };
