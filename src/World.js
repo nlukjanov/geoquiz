@@ -80,15 +80,16 @@ const World = () => {
 
   return (
     <div>
-      <h2>Guess the flag</h2>
+      <h2 data-testid='h2 title'>Guess the flag</h2>
       <img
+        data-testid='flag image'
         src={question.flag}
         style={{ width: '400px', height: '200px' }}
         alt='flag'
       />
-      <div>
+      <div data-testid='answers block'>
         {question.answers.map((answer, index) => (
-          <button onClick={handleAnswerClick} key={index}>
+          <button data-testid={`button ${index}`} onClick={handleAnswerClick} key={index}>
             {answer}
           </button>
         ))}
