@@ -15,6 +15,7 @@ const World = () => {
   const getData = async () => {
     try {
       const response = await axios.get('https://restcountries.eu/rest/v2/all');
+      console.log(response);
       setData(response.data);
     } catch (error) {
       console.log(error);
@@ -94,7 +95,7 @@ const World = () => {
           </button>
         ))}
       </div>
-      <div>{guess && <div>You are {guess}</div>}</div>
+      {guess && <div>You are {guess}</div>}
     </div>
   );
 };
