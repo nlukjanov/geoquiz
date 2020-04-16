@@ -14,6 +14,7 @@ const App = () => {
   const asia = 'https://restcountries.eu/rest/v2/region/asia';
   const africa = 'https://restcountries.eu/rest/v2/region/africa';
   const americas = 'https://restcountries.eu/rest/v2/region/americas';
+
   return (
     <BrowserRouter>
       <main data-testid='main'>

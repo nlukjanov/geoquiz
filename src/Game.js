@@ -89,7 +89,7 @@ const Question = ({ url }) => {
     makeQuestion();
   };
 
-  if (questionCount === 3) {
+  if (questionCount === 10) {
     return (
       <Redirect
         to={{
