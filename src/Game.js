@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
-import GameSummary from './GameSummary';
 
 const Question = ({ url }) => {
   const [data, setData] = useState([]);
@@ -16,18 +15,17 @@ const Question = ({ url }) => {
   const [guess, setGuess] = useState('');
   const [answered, setAnswered] = useState(false);
 
-  const getData = async () => {
-    try {
-      const response = await axios.get(url);
-      setData(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
+    const getData = async () => {
+      try {
+        const response = await axios.get(url);
+        setData(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
     getData();
-  }, []);
+  }, [url]);
 
   useEffect(() => {
     if (data.length !== 0) {
