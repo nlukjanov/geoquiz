@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import GameSummary from './GameSummary';
 
@@ -12,7 +12,7 @@ const Question = ({ url }) => {
   });
 
   const [score, setScore] = useState(0);
-  const [questionCount, setQuestionCount] = useState(0);
+  const [questionCount, setQuestionCount] = useState(1);
   const [guess, setGuess] = useState('');
   const [answered, setAnswered] = useState(false);
 
@@ -81,7 +81,7 @@ const Question = ({ url }) => {
       setGuess('Incorrect');
     }
   };
-  
+
   const handleNextQuestion = () => {
     setQuestionCount(questionCount + 1);
     setAnswered(false);
@@ -90,7 +90,16 @@ const Question = ({ url }) => {
   };
 
   if (questionCount === 3) {
-    return <GameSummary />;
+    return (
+      <Redirect
+        to={{
+          pathname: '/game-summary',
+          state: { score: score, questionCount: questionCount }
+        }}
+      >
+        Finish Game
+      </Redirect>
+    );
   }
 
   return (
@@ -99,7 +108,7 @@ const Question = ({ url }) => {
       <img
         data-testid='flag image'
         src={question.flag}
-        style={{ width: '400px', height: '200px' }}
+        style={{ width: '500px', height: '300px' }}
         alt='flag'
       />
       <div data-testid='answers block'>
@@ -118,7 +127,14 @@ const Question = ({ url }) => {
         <div>
           <div>You are {guess}</div>
           <div>
-            <Link to='/game-summary'>Finish Game</Link>
+            <Link
+              to={{
+                pathname: '/game-summary',
+                state: { score: score, questionCount: questionCount }
+              }}
+            >
+              <button>Finish Game</button>
+            </Link>
             <button onClick={handleNextQuestion}>Next Question</button>
           </div>
         </div>
