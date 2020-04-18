@@ -14,6 +14,7 @@ const Question = ({ url }) => {
   const [questionCount, setQuestionCount] = useState(1);
   const [guess, setGuess] = useState('');
   const [answered, setAnswered] = useState(false);
+  const [clickedButton, setClickedButton] = useState('');
 
   useEffect(() => {
     const getData = async () => {
@@ -71,6 +72,7 @@ const Question = ({ url }) => {
   };
 
   const handleAnswerClick = (e) => {
+    setClickedButton(e.target.id);
     setAnswered(true);
     if (e.target.textContent === question.correctAnswer) {
       setScore(score + 1);
@@ -112,6 +114,12 @@ const Question = ({ url }) => {
       <div data-testid='answers block'>
         {question.answers.map((answer, index) => (
           <button
+            id={answer}
+            className={`${
+              (answered && answer === question.correctAnswer
+                ? 'correct'
+                : '') || (answered && answer === clickedButton ? 'wrong' : '')
+            }`}
             data-testid={`button ${index}`}
             onClick={handleAnswerClick}
             key={index}
