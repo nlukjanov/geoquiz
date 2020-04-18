@@ -105,11 +105,7 @@ const Question = ({ url }) => {
   return (
     <div className='game'>
       <h2 data-testid='h2 title'>Guess the flag</h2>
-      <img
-        data-testid='flag image'
-        src={question.flag}
-        alt='flag'
-      />
+      <img data-testid='flag image' src={question.flag} alt='flag' />
       <div data-testid='answers block'>
         {question.answers.map((answer, index) => (
           <button
@@ -136,7 +132,14 @@ const Question = ({ url }) => {
             <p>You will get it next time!</p>
           )}
           <div>
-            <Link to='/game-summary'><button>Finish Game</button></Link>
+            <Link
+              to={{
+                pathname: '/game-summary',
+                state: { score: score, questionCount: questionCount }
+              }}
+            >
+              <button>Finish Game</button>
+            </Link>
             <button onClick={handleNextQuestion}>Next Question</button>
           </div>
         </div>
