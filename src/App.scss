@@ -1,0 +1,87 @@
+main {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  padding-top: 1rem;
+}
+
+
+button {
+  padding: 0.5rem 1rem;
+  margin: 0.5rem;
+  text-decoration: none;
+  display: inline-block;
+  border: none;
+  border-radius: 2rem;
+  background: #1455ff;
+  color: #ffffff;
+  font-family: sans-serif;
+  font-size: 1rem;
+  cursor: pointer;
+  text-align: center;
+  transition: background 300ms ease-in-out, transform 150ms ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+button:focus {
+  outline: 1px solid #fff;
+  outline-offset: -4px;
+}
+
+button:active {
+  transform: scale(0.99);
+}
+
+@media only screen and (min-width: 600px) {
+  main {
+    padding-top: 3rem;
+  }
+  button {
+    padding: 1rem 3rem;
+    margin: 1rem;
+  }
+  .game {
+    max-width: 60%;
+  }
+}
+
+.title {
+  font-size: 4rem;
+  color: #1455ff;
+}
+
+
+.game-select {
+  padding-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+img {
+  border: 1px solid #1455ff;
+  max-width: 90%;
+  margin: 0.5rem 0;
+  max-height: auto;
+}
+
+.correct {
+  background-color: green;
+}
+
+.wrong {
+  background-color: red;
+}
+
+.answer {
+  font-size: 1.5rem;
+  p {
+    margin: 0.5rem;
+    padding: 0.5rem;
+  }
+}
+
+.game-summary {
+  font-size: 1.5rem;
+}

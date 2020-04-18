@@ -5,12 +5,12 @@ const GameSummary = (props) => {
   const { score, questionCount } = props.location.state;
   const answerRate = 100 * (score / questionCount).toFixed(2);
   return (
-    <>
-      <div>You had {questionCount} questions</div>
-      <div>You guessed {score} flags</div>
-      <div>You guessed correctly {answerRate}% of flags</div>
-      <Link to='/game-select'>New Game?</Link>
-    </>
+    <div className='game-summary'>
+      <p>You had {questionCount} questions</p>
+      <p>You guessed {score} flags</p>
+      <p>You guessed correctly {answerRate}% of flags</p>
+      <Link to='/game-select'><button>New Game?</button></Link>
+    </div>
   );
 };
 

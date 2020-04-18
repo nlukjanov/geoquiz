@@ -103,12 +103,11 @@ const Question = ({ url }) => {
   }
 
   return (
-    <div>
+    <div className='game'>
       <h2 data-testid='h2 title'>Guess the flag</h2>
       <img
         data-testid='flag image'
         src={question.flag}
-        style={{ width: '500px', height: '300px' }}
         alt='flag'
       />
       <div data-testid='answers block'>
@@ -130,17 +129,14 @@ const Question = ({ url }) => {
         ))}
       </div>
       {guess && (
-        <div>
-          <div>You are {guess}</div>
+        <div className='answer'>
+          {guess === 'Correct' ? (
+            <p>You got it!</p>
+          ) : (
+            <p>You will get it next time!</p>
+          )}
           <div>
-            <Link
-              to={{
-                pathname: '/game-summary',
-                state: { score: score, questionCount: questionCount }
-              }}
-            >
-              <button>Finish Game</button>
-            </Link>
+            <Link to='/game-summary'><button>Finish Game</button></Link>
             <button onClick={handleNextQuestion}>Next Question</button>
           </div>
         </div>
