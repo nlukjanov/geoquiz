@@ -27,7 +27,7 @@ const Game = ({ url }) => {
           setData(response.data);
         }
       } catch (error) {
-        console.log(error);
+        console.log('Something went wrong with api request', error);
       }
     };
     getData();
@@ -107,6 +107,18 @@ const Game = ({ url }) => {
       >
         Finish Game
       </Redirect>
+    );
+  }
+
+  if (data.length === 0) {
+    return (
+      <div data-testid='error'>
+        <p>
+          Sorry, something is wrong with database website. Cannot create any
+          questions 😭
+        </p>
+        <p>Try to refresh the page</p>
+      </div>
     );
   }
 
