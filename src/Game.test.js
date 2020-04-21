@@ -1,112 +1,66 @@
 import React from 'react';
-import { render, waitFor, debug } from '@testing-library/react';
+import { render, waitFor, debug, cleanup } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import axiosMock from 'axios';
 import Game from './Game';
 
-jest.mock('axios', () => {
-  return {
-    get: jest.fn(() =>
-      Promise.resolve({
-        data: [
-          {
-            flag: 'some flag',
-            name: 'some name'
-          },
-          {
-            flag: 'some flag',
-            name: 'some name'
-          },
-          {
-            flag: 'some flag',
-            name: 'some name'
-          },
-          {
-            flag: 'some flag',
-            name: 'some name'
-          },
-          {
-            flag: 'some flag',
-            name: 'some name'
-          },
-          {
-            flag: 'some flag',
-            name: 'some name'
-          },
-          {
-            flag: 'some flag',
-            name: 'some name'
-          }
-        ]
-      })
-    )
-  };
-});
+afterEach(cleanup);
+
+jest.mock('axios');
+
+const countries = [
+  {
+    flag: 'flag1',
+    name: 'country1'
+  },
+  {
+    flag: 'flag2',
+    name: 'country2'
+  },
+  {
+    flag: 'flag3',
+    name: 'country3'
+  },
+  {
+    flag: 'flag4',
+    name: 'country4'
+  },
+  {
+    flag: 'flag5',
+    name: 'country5'
+  },
+  {
+    flag: 'flag6',
+    name: 'country6'
+  }
+];
 
 describe('<Game />', () => {
-  it('should render a component', () => {
-    const { getByTestId } = render(
-      <BrowserRouter>
-        <Game />
-      </BrowserRouter>
-    );
-
-    expect(getByTestId('game')).toBeInTheDocument();
-    expect(getByTestId('h2 title')).toBeInTheDocument();
-    expect(getByTestId('flag image')).toBeInTheDocument();
-    expect(getByTestId('answers container')).toBeInTheDocument();
-  });
-
-  it('should render answers', async () => {
+  it('should render component with answers', async () => {
     const url = '/some-url';
-
+    axiosMock.get.mockResolvedValueOnce({
+      data: countries
+    });
     const { getByTestId } = render(
       <BrowserRouter>
         <Game url={url} />
       </BrowserRouter>
     );
 
-    const countries = [
-      {
-        flag: 'some flag',
-        name: 'some name'
-      },
-      {
-        flag: 'some flag',
-        name: 'some name'
-      },
-      {
-        flag: 'some flag',
-        name: 'some name'
-      },
-      {
-        flag: 'some flag',
-        name: 'some name'
-      },
-      {
-        flag: 'some flag',
-        name: 'some name'
-      },
-      {
-        flag: 'some flag',
-        name: 'some name'
-      },
-      {
-        flag: 'some flag',
-        name: 'some name'
-      }
-    ];
-    const response = { data: countries };
+    await waitFor(() => expect(axiosMock.get).toHaveBeenCalled());
+    expect(axiosMock.get).toHaveBeenCalledWith(url);
+    expect(getByTestId('game')).toBeInTheDocument();
+    expect(getByTestId('h2 title')).toBeInTheDocument();
+    expect(getByTestId('flag image')).toBeInTheDocument();
+    expect(getByTestId('answers container')).toBeInTheDocument();
+  });
 
-    await waitFor(() => [
-      expect(axiosMock.get).toHaveBeenCalled(),
-      expect(axiosMock.get).toHaveBeenCalledWith(url)
-    ]);
-    // await waitFor(() => [
-    //   expect(axiosMock.get.mockResolvedValue((response))).toHaveBeenCalled(),
-    //   expect(getByTestId(/button 1/i)).toBeInTheDocument(),
-    //   expect(getByTestId(/button 2/i)).toBeInTheDocument(),
-    //   expect(getByTestId(/button 3/i)).toBeInTheDocument()
-    // ]);
+  it('should render error if there is no data', () => {
+    const { getByTestId } = render(
+      <BrowserRouter>
+        <Game />
+      </BrowserRouter>
+    );
+    expect(getByTestId('error')).toBeInTheDocument();
   });
 });
