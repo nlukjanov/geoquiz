@@ -23,6 +23,7 @@ const Game = ({ url }) => {
       try {
         const response = await axios.get(url);
         if (mounted) {
+          console.log(response);
           setData(response.data);
         }
       } catch (error) {
