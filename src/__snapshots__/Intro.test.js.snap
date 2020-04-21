@@ -14,7 +14,11 @@ exports[`<Intro /> should render a component 1`] = `
     data-testid="link to new game"
     href="/game-select"
   >
-    Start New Game
+    <button
+      class="start"
+    >
+      Start New Game
+    </button>
   </a>
 </div>
 `;

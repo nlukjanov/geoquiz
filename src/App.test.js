@@ -5,6 +5,6 @@ import App from './App';
 describe('<App />', () => {
   it('should render a component', () => {
     const { getByTestId } = render(<App />);
-    expect(getByTestId('intro')).toBeTruthy;
+    expect(getByTestId('intro')).toBeInTheDocument();
   });
 });

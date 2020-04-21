@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 
-const Question = ({ url }) => {
+const Game = ({ url }) => {
   const [data, setData] = useState([]);
   const [question, setQuestion] = useState({
     flag: '',
@@ -17,15 +17,22 @@ const Question = ({ url }) => {
   const [clickedButton, setClickedButton] = useState('');
 
   useEffect(() => {
+    let mounted = true;
+
     const getData = async () => {
       try {
         const response = await axios.get(url);
-        setData(response.data);
+        if (mounted) {
+          setData(response.data);
+        }
       } catch (error) {
         console.log(error);
       }
     };
     getData();
+    return () => {
+      mounted = false;
+    };
   }, [url]);
 
   useEffect(() => {
@@ -103,10 +110,10 @@ const Question = ({ url }) => {
   }
 
   return (
-    <div className='game'>
+    <div data-testid='game' className='game'>
       <h2 data-testid='h2 title'>Guess the flag</h2>
       <img data-testid='flag image' src={question.flag} alt='flag' />
-      <div data-testid='answers block'>
+      <div data-testid='answers container'>
         {question.answers.map((answer, index) => (
           <button
             id={answer}
@@ -148,4 +155,4 @@ const Question = ({ url }) => {
   );
 };
 
-export default Question;
+export default Game;
