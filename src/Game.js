@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
+const utils = require('./utils/utils');
 
 const Game = ({ url }) => {
   const [data, setData] = useState([]);
@@ -23,7 +24,6 @@ const Game = ({ url }) => {
       try {
         const response = await axios.get(url);
         if (mounted) {
-          console.log(response);
           setData(response.data);
         }
       } catch (error) {
@@ -43,7 +43,7 @@ const Game = ({ url }) => {
   }, [data]);
 
   const makeQuestion = () => {
-    const questionCountry = data[Math.floor(Math.random() * data.length)];
+    const questionCountry = utils.getRandomCountry(data);
     const flag = questionCountry.flag;
     const correctAnswer = questionCountry.name;
     const excludeQuestionCountry = data.filter((country) => {
@@ -65,18 +65,8 @@ const Game = ({ url }) => {
     setQuestion({
       flag,
       correctAnswer,
-      answers: shuffleArray(answers)
+      answers: utils.shuffleArray(answers)
     });
-  };
-
-  const shuffleArray = (array) => {
-    const newArray = [];
-    while (array.length) {
-      const randomIndex = Math.floor(Math.random() * array.length),
-        element = array.splice(randomIndex, 1);
-      newArray.push(element[0]);
-    }
-    return newArray;
   };
 
   const handleAnswerClick = (e) => {
@@ -97,27 +87,22 @@ const Game = ({ url }) => {
     makeQuestion();
   };
 
-  if (questionCount === 10) {
+  if (questionCount === 11) {
     return (
       <Redirect
         to={{
           pathname: '/game-summary',
-          state: { score: score, questionCount: questionCount }
+          state: { score: score, questionCount: questionCount - 1 }
         }}
-      >
-        Finish Game
-      </Redirect>
+      />
     );
   }
 
   if (data.length === 0) {
     return (
       <div data-testid='error'>
-        <p>
-          Sorry, something is wrong with database website. Cannot create any
-          questions 😭
-        </p>
-        <p>Try to refresh the page</p>
+        <p>The page is loading.</p>
+        <p>If you see this message too long, try to refresh the page</p>
       </div>
     );
   }
@@ -125,6 +110,10 @@ const Game = ({ url }) => {
   return (
     <div data-testid='game' className='game'>
       <h2 data-testid='h2 title'>Guess the flag</h2>
+      <div className='info'>
+        <h2 data-testid='score'>Score: {score}</h2>
+        <h2 data-testid='question-count'>Question: {questionCount}</h2>
+      </div>
       <img data-testid='flag image' src={question.flag} alt='flag' />
       <div data-testid='answers container'>
         {question.answers.map((answer, index) => (
@@ -145,11 +134,11 @@ const Game = ({ url }) => {
         ))}
       </div>
       {guess && (
-        <div className='answer'>
+        <div data-testid='guess-result' className='answer'>
           {guess === 'Correct' ? (
-            <p>You got it!</p>
+            <p data-testid='correct-answer-message'>You got it!</p>
           ) : (
-            <p>You will get it next time!</p>
+            <p data-testid='wrong-answer-message'>You will get it next time!</p>
           )}
           <div>
             <Link
@@ -160,7 +149,7 @@ const Game = ({ url }) => {
             >
               <button>Finish Game</button>
             </Link>
-            <button onClick={handleNextQuestion}>Next Question</button>
+            <button data-testid='next-question' onClick={handleNextQuestion}>Next Question</button>
           </div>
         </div>
       )}
