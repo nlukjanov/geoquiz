@@ -1,8 +1,9 @@
 import React from 'react';
-import { render, waitFor, fireEvent, queryByTestId } from '@testing-library/react';
+import { render, waitFor, fireEvent } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import axiosMock from 'axios';
 import Game from './Game';
+
 
 jest.mock('axios');
 jest.mock('./utils/utils', () => {
@@ -143,5 +144,27 @@ describe('<Game />', () => {
     const nextQuestion = getByTestId('next-question');
     fireEvent.click(nextQuestion);
     expect(getByTestId('question-count')).toHaveTextContent('Question: 2');
+  });
+
+  it.skip('should redirect to game summary when question limit reached and you click next question', async () => {
+    const url = '/some-url';
+    axiosMock.get.mockResolvedValueOnce({
+      data: countries
+    });
+
+    const questionLimit = 2;
+
+    const { getByTestId } = render(
+      <BrowserRouter>
+        <Game url={url} questionLimit={questionLimit} />
+      </BrowserRouter>
+    );
+
+    await waitFor(() => expect(getByTestId('button 0')).toBeInTheDocument());
+    const correctAnswer = getByTestId('button 0');
+    fireEvent.click(correctAnswer);
+    const nextQuestion = getByTestId('next-question');
+    fireEvent.click(nextQuestion);
+    await waitFor(() => expect(getByTestId('game-summary')).toBeInTheDocument());
   });
 });

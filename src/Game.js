@@ -3,13 +3,15 @@ import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 const utils = require('./utils/utils');
 
-const Game = ({ url }) => {
+const Game = ({ url, questionLimit }) => {
   const [data, setData] = useState([]);
   const [question, setQuestion] = useState({
     flag: '',
     correctAnswer: '',
     answers: []
   });
+  
+  const totalNumberOfQuestions = questionLimit || 11;
 
   const [score, setScore] = useState(0);
   const [questionCount, setQuestionCount] = useState(1);
@@ -87,7 +89,7 @@ const Game = ({ url }) => {
     makeQuestion();
   };
 
-  if (questionCount === 11) {
+  if (questionCount === totalNumberOfQuestions) {
     return (
       <Redirect
         to={{
@@ -98,7 +100,7 @@ const Game = ({ url }) => {
     );
   }
 
-  if (data.length === 0) {
+  if (!data.length) {
     return (
       <div data-testid='error'>
         <p>The page is loading.</p>
