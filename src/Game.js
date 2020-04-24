@@ -25,7 +25,7 @@ const Game = ({ url, questionLimit }) => {
     const getData = async () => {
       try {
         const response = await axios.get(url);
-        if (mounted) {
+        if (mounted && response) {
           setData(response.data);
         }
       } catch (error) {

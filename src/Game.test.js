@@ -165,7 +165,7 @@ describe('<Game />', () => {
     const questionLimit = 2;
     const redirectUrl = '/game-summary';
 
-    const { getByTestId, container, debug } = render(
+    const { getByTestId, container } = render(
       <TestingRouter
         ComponentWithRedirection={() => (
           <Game url={url} questionLimit={questionLimit} />
@@ -179,9 +179,6 @@ describe('<Game />', () => {
     fireEvent.click(correctAnswer);
     const nextQuestion = getByTestId('next-question');
     fireEvent.click(nextQuestion);
-    debug();
-    await waitFor(() =>
-      expect(container.innerHTML).toEqual(expect.stringContaining(redirectUrl))
-    );
+    expect(container.innerHTML).toEqual(expect.stringContaining(redirectUrl));
   });
 });

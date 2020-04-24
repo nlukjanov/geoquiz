@@ -14,7 +14,7 @@
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --collect-coverage --watchAll --verbose --env=jest-environment-jsdom-sixteen",
+    "test": "react-scripts test --collect-coverage --watch --verbose --env=jest-environment-jsdom-sixteen",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const GameSummary = (props) => {
-  console.log(props);
   const { score, questionCount } = props.location.state;
   const answerRate = 100 * (score / questionCount).toFixed(2);
   return (
