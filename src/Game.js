@@ -104,7 +104,8 @@ const Game = ({ url, questionLimit }) => {
     return (
       <div data-testid='error'>
         <p>The page is loading.</p>
-        <p>If you see this message too long, try to refresh the page</p>
+        <p>Wait a little bit.</p>
+        <p>If you see this message too long, try to refresh the page.</p>
       </div>
     );
   }

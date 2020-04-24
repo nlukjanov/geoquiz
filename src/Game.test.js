@@ -3,7 +3,7 @@ import { render, waitFor, fireEvent } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import axiosMock from 'axios';
 import Game from './Game';
-
+import TestingRouter from './TestingRouter';
 
 jest.mock('axios');
 jest.mock('./utils/utils', () => {
@@ -94,7 +94,11 @@ describe('<Game />', () => {
     expect(getByTestId('score')).toHaveTextContent('Score: 0');
     expect(getByTestId('question-count')).toHaveTextContent('Question: 1');
     fireEvent.click(correctAnswer);
-    await waitFor(() => expect(getByTestId('correct-answer-message')).toHaveTextContent('You got it!'));
+    await waitFor(() =>
+      expect(getByTestId('correct-answer-message')).toHaveTextContent(
+        'You got it!'
+      )
+    );
     expect(getByTestId('score')).toHaveTextContent('Score: 1');
     expect(getByTestId('question-count')).toHaveTextContent('Question: 1');
     expect(getByTestId('guess-result')).toBeInTheDocument();
@@ -118,7 +122,11 @@ describe('<Game />', () => {
     expect(getByTestId('score')).toHaveTextContent('Score: 0');
     expect(getByTestId('question-count')).toHaveTextContent('Question: 1');
     fireEvent.click(wrongAnswer);
-    await waitFor(() => expect(getByTestId('wrong-answer-message')).toHaveTextContent('You will get it next time!'));
+    await waitFor(() =>
+      expect(getByTestId('wrong-answer-message')).toHaveTextContent(
+        'You will get it next time!'
+      )
+    );
     expect(getByTestId('score')).toHaveTextContent('Score: 0');
     expect(getByTestId('question-count')).toHaveTextContent('Question: 1');
     expect(getByTestId('guess-result')).toBeInTheDocument();
@@ -140,24 +148,30 @@ describe('<Game />', () => {
     expect(queryByTestId('next-question')).not.toBeInTheDocument();
     const correctAnswer = getByTestId('button 0');
     fireEvent.click(correctAnswer);
-    await waitFor(() => expect(getByTestId('correct-answer-message')).toBeInTheDocument());
+    await waitFor(() =>
+      expect(getByTestId('correct-answer-message')).toBeInTheDocument()
+    );
     const nextQuestion = getByTestId('next-question');
     fireEvent.click(nextQuestion);
     expect(getByTestId('question-count')).toHaveTextContent('Question: 2');
   });
 
-  it.skip('should redirect to game summary when question limit reached and you click next question', async () => {
+  it('should redirect to game summary when question limit reached and you click next question', async () => {
     const url = '/some-url';
     axiosMock.get.mockResolvedValueOnce({
       data: countries
     });
 
     const questionLimit = 2;
+    const redirectUrl = '/game-summary';
 
-    const { getByTestId } = render(
-      <BrowserRouter>
-        <Game url={url} questionLimit={questionLimit} />
-      </BrowserRouter>
+    const { getByTestId, container, debug } = render(
+      <TestingRouter
+        ComponentWithRedirection={() => (
+          <Game url={url} questionLimit={questionLimit} />
+        )}
+        RedirectUrl={redirectUrl}
+      />
     );
 
     await waitFor(() => expect(getByTestId('button 0')).toBeInTheDocument());
@@ -165,6 +179,9 @@ describe('<Game />', () => {
     fireEvent.click(correctAnswer);
     const nextQuestion = getByTestId('next-question');
     fireEvent.click(nextQuestion);
-    await waitFor(() => expect(getByTestId('game-summary')).toBeInTheDocument());
+    debug();
+    await waitFor(() =>
+      expect(container.innerHTML).toEqual(expect.stringContaining(redirectUrl))
+    );
   });
 });
