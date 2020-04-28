@@ -95,7 +95,7 @@ describe('<Game />', () => {
     expect(getByTestId('question-count')).toHaveTextContent('Question: 1');
     fireEvent.click(correctAnswer);
     await waitFor(() =>
-      expect(getByTestId('correct-answer-message')).toHaveTextContent(
+      expect(getByTestId('guess-answer-message')).toHaveTextContent(
         'You got it!'
       )
     );
@@ -123,7 +123,7 @@ describe('<Game />', () => {
     expect(getByTestId('question-count')).toHaveTextContent('Question: 1');
     fireEvent.click(wrongAnswer);
     await waitFor(() =>
-      expect(getByTestId('wrong-answer-message')).toHaveTextContent(
+      expect(getByTestId('guess-answer-message')).toHaveTextContent(
         'You will get it next time!'
       )
     );
@@ -149,7 +149,7 @@ describe('<Game />', () => {
     const correctAnswer = getByTestId('button 0');
     fireEvent.click(correctAnswer);
     await waitFor(() =>
-      expect(getByTestId('correct-answer-message')).toBeInTheDocument()
+      expect(getByTestId('guess-answer-message')).toBeInTheDocument()
     );
     const nextQuestion = getByTestId('next-question');
     fireEvent.click(nextQuestion);

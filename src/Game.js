@@ -139,9 +139,9 @@ const Game = ({ url, questionLimit }) => {
       {guess && (
         <div data-testid='guess-result' className='answer'>
           {guess === 'Correct' ? (
-            <p data-testid='correct-answer-message'>You got it!</p>
+            <p data-testid='guess-answer-message'>You got it!</p>
           ) : (
-            <p data-testid='wrong-answer-message'>You will get it next time!</p>
+            <p data-testid='guess-answer-message'>You will get it next time!</p>
           )}
           <div>
             <Link
@@ -150,7 +150,7 @@ const Game = ({ url, questionLimit }) => {
                 state: { score: score, questionCount: questionCount }
               }}
             >
-              <button>Finish Game</button>
+              <button data-testid='finish-game'>Finish Game</button>
             </Link>
             <button data-testid='next-question' onClick={handleNextQuestion}>Next Question</button>
           </div>
