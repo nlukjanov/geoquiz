@@ -4,7 +4,8 @@
   "private": true,
   "dependencies": {
     "axios": "^0.19.2",
-    "node-sass": "^4.13.1",
+    "is-ci-cli": "^2.1.2",
+    "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
@@ -14,7 +15,9 @@
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --collect-coverage --watch --verbose --env=jest-environment-jsdom-sixteen",
+    "test": "is-ci test:cov test:watch",
+    "test:cov": "react-scripts test --collect-coverage --verbose --env=jest-environment-jsdom-sixteen",
+    "test:watch": "react-scripts test --collect-coverage --watch --verbose --env=jest-environment-jsdom-sixteen",
     "eject": "react-scripts eject",
     "cypress:open": "cypress open"
   },
