@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Link, Redirect } from 'react-router-dom';
-import axios from 'axios';
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
+import { Link, Redirect } from 'react-router-dom'
 const utils = require('./utils/utils');
 
 const Game = ({ url, questionLimit }) => {
@@ -40,11 +40,11 @@ const Game = ({ url, questionLimit }) => {
 
   useEffect(() => {
     if (data.length !== 0) {
-      makeQuestion();
+      makeQuestion(data);
     }
   }, [data]);
 
-  const makeQuestion = () => {
+  const makeQuestion = (data) => {
     const questionCountry = utils.getRandomCountry(data);
     const flag = questionCountry.flag;
     const correctAnswer = questionCountry.name;
@@ -86,7 +86,7 @@ const Game = ({ url, questionLimit }) => {
     setQuestionCount(questionCount + 1);
     setAnswered(false);
     setGuess('');
-    makeQuestion();
+    makeQuestion(data);
   };
 
   if (questionCount === totalNumberOfQuestions) {
