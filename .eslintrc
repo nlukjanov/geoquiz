@@ -4,11 +4,14 @@
     "commonjs": true,
     "es6": true,
     "node": true,
-    "jest": true,
-    "cypress/globals": true
+    "jest": true
   },
-  "plugins": ["react", "react-hooks", "eslint-plugin-cypress"],
-  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "eslint-config-prettier"
+  ],
+  "plugins": ["react", "react-hooks", "eslint-plugin-prettier"],
   "parser": "babel-eslint",
   "parserOptions": {
     "sourceType": "module",
@@ -18,6 +21,7 @@
     }
   },
   "rules": {
+    "prettier/prettier": "warn",
     "brace-style": "error",
     "camelcase": ["error", { "properties": "never" }],
     "comma-dangle": ["error", "never"],

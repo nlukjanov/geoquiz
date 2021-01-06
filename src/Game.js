@@ -1,6 +1,6 @@
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
-import { Link, Redirect } from 'react-router-dom'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { Link, Redirect } from 'react-router-dom';
 const utils = require('./utils/utils');
 
 const Game = ({ url, questionLimit }) => {
@@ -10,7 +10,7 @@ const Game = ({ url, questionLimit }) => {
     correctAnswer: '',
     answers: []
   });
-  
+
   const totalNumberOfQuestions = questionLimit || 11;
 
   const [score, setScore] = useState(0);
@@ -152,7 +152,9 @@ const Game = ({ url, questionLimit }) => {
             >
               <button data-testid='finish-game'>Finish Game</button>
             </Link>
-            <button data-testid='next-question' onClick={handleNextQuestion}>Next Question</button>
+            <button data-testid='next-question' onClick={handleNextQuestion}>
+              Next Question
+            </button>
           </div>
         </div>
       )}
