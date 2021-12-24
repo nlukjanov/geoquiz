@@ -7,13 +7,12 @@ import GameSelect from './GameSelect';
 import GameSummary from './GameSummary';
 import Game from './Game';
 
-
 const App = () => {
-  const world = 'https://restcountries.eu/rest/v2/all';
-  const europe = 'https://restcountries.eu/rest/v2/region/europe';
-  const asia = 'https://restcountries.eu/rest/v2/region/asia';
-  const africa = 'https://restcountries.eu/rest/v2/region/africa';
-  const americas = 'https://restcountries.eu/rest/v2/region/americas';
+  const world = 'https://restcountries.com/v2/all';
+  const europe = 'https://restcountries.com/v2/region/europe';
+  const asia = 'https://restcountries.com/v2/region/asia';
+  const africa = 'https://restcountries.com/v2/region/africa';
+  const americas = 'https://restcountries.com/v2/region/americas';
 
   return (
     <BrowserRouter>
@@ -21,11 +20,26 @@ const App = () => {
         <Switch>
           <Route exact path='/' component={Intro} />
           <Route path='/game-select' component={GameSelect} />
-          <Route path='/world' render={(props) => <Game {...props} url={world}/>} />
-          <Route path='/europe' render={(props) => <Game {...props} url={europe}/>} />
-          <Route path='/asia' render={(props) => <Game {...props} url={asia}/>} />
-          <Route path='/africa' render={(props) => <Game {...props} url={africa}/>} />
-          <Route path='/americas' render={(props) => <Game {...props} url={americas}/>} />
+          <Route
+            path='/world'
+            render={(props) => <Game {...props} url={world} />}
+          />
+          <Route
+            path='/europe'
+            render={(props) => <Game {...props} url={europe} />}
+          />
+          <Route
+            path='/asia'
+            render={(props) => <Game {...props} url={asia} />}
+          />
+          <Route
+            path='/africa'
+            render={(props) => <Game {...props} url={africa} />}
+          />
+          <Route
+            path='/americas'
+            render={(props) => <Game {...props} url={americas} />}
+          />
           <Route path='/game-summary' component={GameSummary} />
         </Switch>
       </main>
