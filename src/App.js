@@ -7,12 +7,14 @@ import GameSelect from './GameSelect';
 import GameSummary from './GameSummary';
 import Game from './Game';
 
+const apiUrl = 'https://restcountries.com/v2';
+
 const App = () => {
-  const world = 'https://restcountries.com/v2/all';
-  const europe = 'https://restcountries.com/v2/region/europe';
-  const asia = 'https://restcountries.com/v2/region/asia';
-  const africa = 'https://restcountries.com/v2/region/africa';
-  const americas = 'https://restcountries.com/v2/region/americas';
+  const world = `${apiUrl}/all`;
+  const europe = `${apiUrl}/region/europe`;
+  const asia = `${apiUrl}/region/asia`;
+  const africa = `${apiUrl}/region/africa`;
+  const americas = `${apiUrl}/region/americas`;
 
   return (
     <BrowserRouter>
