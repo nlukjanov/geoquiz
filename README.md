@@ -6,4 +6,4 @@ To run locally:
 2. `npm install`
 3. `npm run start`
 
-This project is deployed to Firebase: 
+This project is deployed to Firebase: [GeoQuiz](https://geoquiz-daa3c.web.app/)
