@@ -45,8 +45,12 @@ const Game = ({ url, questionLimit }) => {
   }, [data]);
 
   const makeQuestion = (data) => {
+    console.log('data', data);
+    console.log('random country', utils.getRandomCountry);
     const questionCountry = utils.getRandomCountry(data);
+    console.log('question', questionCountry);
     const flag = questionCountry.flag;
+    console.log('flag', flag);
     const correctAnswer = questionCountry.name;
     const excludeQuestionCountry = data.filter((country) => {
       return country !== questionCountry;
@@ -99,6 +103,8 @@ const Game = ({ url, questionLimit }) => {
       />
     );
   }
+
+  console.log('data', !data.length);
 
   if (!data.length) {
     return (

@@ -43,17 +43,18 @@ const countries = [
 ];
 
 describe('<Game />', () => {
-  it('should render component with answers', async () => {
+  it.only('should render component with answers', async () => {
     const url = '/some-url';
     axiosMock.get.mockResolvedValueOnce({
       data: countries
     });
 
-    const { getByTestId } = render(
+    const { getByTestId, debug } = render(
       <BrowserRouter>
         <Game url={url} />
       </BrowserRouter>
     );
+    debug();
     await waitFor(() => expect(axiosMock.get).toHaveBeenCalled());
     expect(axiosMock.get).toHaveBeenCalledWith(url);
     expect(getByTestId('game')).toBeInTheDocument();
